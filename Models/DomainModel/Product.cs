@@ -15,6 +15,12 @@ namespace TechWave.Models.DomainModel
         [MaxLength(500)]
         public string Description { get; set; }
 
+        [MaxLength(500)]
+        public string Brand { get; set; }
+
+        [MaxLength(2000)]
+        public string LongDescription { get; set; }
+
         public string Specifications { get; set; }
 
         [Required]

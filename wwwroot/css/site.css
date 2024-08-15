@@ -17,6 +17,7 @@ html {
   min-height: 100%;
 }
 
+
 /* Navbar Styles */
 .navbar {
     background-color: #212529; /* Dark background */
@@ -112,4 +113,15 @@ footer a {
 footer a:hover {
             color: #f8f9fa; /* White on hover */
             text-decoration: underline;
+
+body {
+  margin-bottom: 60px;
+}
+
+.product-card img {
+    width: 200px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Cover the area while maintaining aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
 }

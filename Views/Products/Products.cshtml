@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TechWave.Models.DomainModel.Product>
+
+@{
+    ViewData["Title"] = "Products";
+    var categories = ViewBag.Categories as IEnumerable<TechWave.Models.DomainModel.Category>;
+}
+
+<h2>Products</h2>
+
+<div class="row mb-3">
+    <div class="col-md-3">
+        <h4>Filter by Category</h4>
+        <form method="get" asp-action="Products">
+            <div class="form-group">
+                <label for="categoryDropdown">Category</label>
+                <select id="categoryDropdown" name="categoryId" class="form-control">
+                    <option value="">All Categories</option>
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.CategoryID">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Apply</button>
+        </form>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="@Url.Content("~/images/" + product.ImageURL)" alt="@product.Name"
+                             style="height: 400px; width: 100%; object-fit: cover;">
+                        <div class="card-body">
+                            <h4>@product.Name</h4>
+                            <p class="card-text">@product.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-muted">@product.Price$</span>
+                                <a asp-action="Details" asp-route-id="@product.ProductID" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
