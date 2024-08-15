@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechWave.Models.DomainModel
 {
@@ -28,7 +29,48 @@ namespace TechWave.Models.DomainModel
         public string ShippingAddress { get; set; }
 
         [Required]
+        [MaxLength(50)]
+        public string City { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string State { get; set; }
+
+        [Required]
         [MaxLength(10)]
         public string ZipCode { get; set; }
+
+        // Billing Information
+        [Required]
+        [MaxLength(200)]
+        public string BillingAddress { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string BillingCity { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string BillingState { get; set; }
+
+        [Required]
+        [MaxLength(10)]
+        public string BillingZipCode { get; set; }
+
+        // Payment Information
+        [Required]
+        [MaxLength(16)]
+        public string CardNumber { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string CardName { get; set; }
+
+        [Required]
+        public DateTime ExpirationDate { get; set; }
+
+        [Required]
+        [MaxLength(4)]
+        public string CVV { get; set; }
     }
 }
