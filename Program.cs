@@ -13,16 +13,17 @@ builder.Services.AddDbContext<TechWaveDBContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("TechWaveContext")));
 
-
 builder.Services.AddIdentity<User, IdentityRole>(options => {
     options.Password.RequiredLength = 6;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireDigit = false;
-}).AddEntityFrameworkStores<TechWaveDBContext>();
+}).AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<TechWaveDBContext>()
+.AddDefaultTokenProviders();
 
 // Add Identity services
-//builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<TechWaveDBContext>();
+/*builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<TechWaveDBContext>();*/
 
 var app = builder.Build();
 
@@ -48,6 +49,13 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using (var scope = scopeFactory.CreateScope())
+{
+    await ConfigureIdentity.CreateAdminUserAsync(scope.ServiceProvider);
+}
+
 
 app.MapControllerRoute(
     name: "default",
