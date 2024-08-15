@@ -17,7 +17,8 @@ builder.Services.AddIdentity<User, IdentityRole>(options => {
     options.Password.RequiredLength = 6;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireDigit = false;
-}).AddRoles<IdentityRole>()
+})
+.AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<TechWaveDBContext>()
 .AddDefaultTokenProviders();
 
@@ -27,11 +28,26 @@ builder.Services.AddIdentity<User, IdentityRole>(options => {
 
 var app = builder.Build();
 
-// Seed the database
+// Apply any pending migrations and update the database
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    SeedTechWaveData.Initialize(services);
+    var dbContext = services.GetRequiredService<TechWaveDBContext>();
+
+    try
+    {
+        // Apply migrations
+        dbContext.Database.Migrate();
+
+        // Seed the database
+        SeedTechWaveData.Initialize(services);
+    }
+    catch (Exception ex)
+    {
+        // Log the exception
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred seeding the DB.");
+    }
 }
 
 // Configure the HTTP request pipeline.
@@ -55,7 +71,6 @@ using (var scope = scopeFactory.CreateScope())
 {
     await ConfigureIdentity.CreateAdminUserAsync(scope.ServiceProvider);
 }
-
 
 app.MapControllerRoute(
     name: "default",
