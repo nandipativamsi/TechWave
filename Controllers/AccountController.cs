@@ -32,19 +32,23 @@ namespace TechWave.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(
-                model.Username, model.Password, isPersistent: model.RememberMe,
-                lockoutOnFailure: false);
-                if (result.Succeeded)
+                var fetchUser = await userManager.FindByEmailAsync(model.Email);
+                if (fetchUser!= null)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) &&
-                    Url.IsLocalUrl(model.ReturnUrl))
+                    var result = await signInManager.PasswordSignInAsync(
+                    fetchUser.UserName, model.Password, isPersistent: false,
+                    lockoutOnFailure: false);
+                    if (result.Succeeded)
                     {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
+                        if (!string.IsNullOrEmpty(model.ReturnUrl) &&
+                        Url.IsLocalUrl(model.ReturnUrl))
+                        {
+                            return Redirect(model.ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                 }
             }
@@ -56,12 +60,12 @@ namespace TechWave.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Username };
+                var user = new User { UserName = model.Username, PhoneNumber = model.PhoneNumber, Email = model.Email };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                   // await signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("LogIn", "Account");
                 }
                 else
                 {
