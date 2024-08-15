@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<TechWave.Models.DomainModel.User> signInManager
+@inject UserManager<TechWave.Models.DomainModel.User> userManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,76 +14,114 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TechWave</a>
+
+                <a href="/" class="navbar-brand">
+                    <img src="~/image/logo.png" alt="TechWave" class="img-fluid">
+                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <!-- Navigation items aligned to the right -->
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Shop</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Products">Products</a> 
                         </li>
-                        
                         @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <form method="post" asp-action="Logout" asp-controller="Account"
-                                      asp-area="">
-                                    <input type="submit" value="Log Out"
-                                           class="btn btn-outline-light" />
-                                    <span class="text-light">@User.Identity.Name</span>
+                                <form method="post" asp-action="Logout" asp-controller="Account" asp-area="">
+                                    <input type="submit" value="Log Out" class="btn btn-outline-light" />
+                                    <span class="text-light">Hi @User.Identity.Name!</span>
                                 </form>
                             </li>
+                            @if (await userManager.IsInRoleAsync(await userManager.GetUserAsync(User), "Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="ManageUser">
+                                        <span class="fas fa-cog"></span>&nbsp;Manage Users
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="Products">
+                                        <span class="fas fa-cog"></span>&nbsp;Manage Products
+                                    </a>
+                                </li>
+                            }
                         }
                         else
                         {
                             var action = ViewContext.RouteData.Values["action"]?.ToString();
-                            // anonymous user - Register link and Log In button
-@*                             <li class="nav-item @Nav.Active("Register", action)"> *@
                             <li class="nav-item">
-
-                                <a asp-action="Register" asp-controller="Account" asp-area=""
-                                   class="nav-link text-dark">
-                                    <span class="fas fa-edit"></span>&nbsp;Register
-                                </a>
+                                <a asp-action="Register" asp-controller="Account" asp-area="" class="nav-link text-light">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-action="Login" asp-controller="Account" asp-area=""
-                                   class="nav-link text-dark">
-                                    Log In
-                                </a>
+                                <a asp-action="Login" asp-controller="Account" asp-area="" class="nav-link text-light">Log In</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-action="Index" asp-controller="User">
-                                <span class="fas fa-cog"></span>&nbsp;Admin
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div>
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - TechWave - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="bg-dark text-white pt-4 pb-4">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Logo and About Section -->
+                <div class="col-md-4 mb-4">
+                    <a href="/" class="d-block mb-3">
+                        <img src="~/image/logo.png" alt="TechWave" class="img-fluid" width="50%">
+                    </a>
+                    <p>Your go-to destination for the latest tech gadgets and accessories. Shop with confidence and enjoy our great deals.</p>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-white">Home</a></li>
+                        <li><a href="/account/register" class="text-white">Register</a></li>
+                        <li><a href="/account/login" class="text-white">Login</a></li>
+                        <li><a href="/Shop/Products" class="text-white">Shop</a></li>
+                        <li><a href="/contact" class="text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 TechWave Street, TechCity, TC 12345</p>
+                    <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> support@techwave.com</p>
+
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center pt-3">
+                &copy; 2024 TechWave. All rights reserved.
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

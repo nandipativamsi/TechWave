@@ -12,8 +12,9 @@ IServiceProvider provider)
             provider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager =
             provider.GetRequiredService<UserManager<User>>();
-            string username = "admin";
-            string password = "Admin123";
+            string username = "Admin";
+            string email = "admin@gmail.com";
+            string password = "Admin@123";
             string roleName = "Admin";
             // if role doesn't exist, create it
             if (await roleManager.FindByNameAsync(roleName) == null)
@@ -23,7 +24,7 @@ IServiceProvider provider)
             // if username doesn't exist, create it and add to role
             if (await userManager.FindByNameAsync(username) == null)
             {
-                User user = new User { UserName = username };
+                User user = new User { UserName = username, Email = email };
                 var result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
