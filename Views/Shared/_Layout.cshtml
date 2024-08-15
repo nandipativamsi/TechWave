@@ -13,29 +13,32 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
+                <!-- Logo aligned to the left -->
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TechWave</a>
+
+                <!-- Toggler for mobile view -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <!-- Navigation items aligned to the right -->
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        
+
                         @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <form method="post" asp-action="Logout" asp-controller="Account"
-                                      asp-area="">
-                                    <input type="submit" value="Log Out"
-                                           class="btn btn-outline-light" />
+                                <form method="post" asp-action="Logout" asp-controller="Account" asp-area="">
+                                    <input type="submit" value="Log Out" class="btn btn-outline-light" />
                                     <span class="text-light">@User.Identity.Name</span>
                                 </form>
                             </li>
@@ -43,34 +46,24 @@
                         else
                         {
                             var action = ViewContext.RouteData.Values["action"]?.ToString();
-                            // anonymous user - Register link and Log In button
-@*                             <li class="nav-item @Nav.Active("Register", action)"> *@
                             <li class="nav-item">
-
-                                <a asp-action="Register" asp-controller="Account" asp-area=""
-                                   class="nav-link text-dark">
-                                    <span class="fas fa-edit"></span>&nbsp;Register
-                                </a>
+                                <a asp-action="Register" asp-controller="Account" asp-area="" class="nav-link text-light">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-action="Login" asp-controller="Account" asp-area=""
-                                   class="nav-link text-dark">
-                                    Log In
-                                </a>
+                                <a asp-action="Login" asp-controller="Account" asp-area="" class="nav-link text-light">Log In</a>
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-action="Index" asp-controller="User">
-                                <span class="fas fa-cog"></span>&nbsp;Admin
-                            </a>
+                            <a class="nav-link text-light" asp-action="Index" asp-controller="User">Admin</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div>
+        <main role="main">
             @RenderBody()
         </main>
     </div>
