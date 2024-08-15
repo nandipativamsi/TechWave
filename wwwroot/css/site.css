@@ -17,25 +17,17 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
 /* Navbar Styles */
 .navbar {
     background-color: #212529; /* Dark background */
     border-bottom: 2px solid #007bff; /* Blue border at the bottom */
-    height: 60px;
 }
 
 .navbar-brand {
-    color: #fff !important;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    margin-left:3%;
+    width:25vh;
 }
 
-    .navbar-brand:hover {
-        color: #737373 !important; /* Change logo color on hover */
-    }
 
 .nav-link {
     color: #ccc !important;
@@ -104,3 +96,20 @@ body {
         font-size: 1.25rem;
         border-radius: 5px;
     }
+footer {
+    background-color: #343a40; /* Dark background */
+    color: white;
+    padding: 30px 0;
+}
+    footer .container-fluid .row {
+        margin-left: 20px; /* Adjust this value as needed */
+    }
+footer a {
+        color: #adb5bd; /* Light gray */
+        text-decoration: none;
+}
+
+footer a:hover {
+            color: #f8f9fa; /* White on hover */
+            text-decoration: underline;
+}
