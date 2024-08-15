@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                
+
                 <a href="/" class="navbar-brand">
                     <img src="~/image/logo.png" alt="TechWave" class="img-fluid">
                 </a>
@@ -40,10 +40,9 @@
                             <li class="nav-item">
                                 <form method="post" asp-action="Logout" asp-controller="Account" asp-area="">
                                     <input type="submit" value="Log Out" class="btn btn-outline-light" />
-                                    <span class="text-light">@User.Identity.Name</span>
+                                    <span class="text-light">Hi @User.Identity.Name!</span>
                                 </form>
                             </li>
-
                             @if (await userManager.IsInRoleAsync(await userManager.GetUserAsync(User), "Admin"))
                             {
                                 <li class="nav-item">
@@ -61,18 +60,13 @@
                         else
                         {
                             var action = ViewContext.RouteData.Values["action"]?.ToString();
-                            // anonymous user - Register link and Log In button
+                            <li class="nav-item">
                                 <a asp-action="Register" asp-controller="Account" asp-area="" class="nav-link text-light">Register</a>
-                                    <span class="fas fa-edit"></span>&nbsp;Register
-                                </a>
                             </li>
                             <li class="nav-item">
                                 <a asp-action="Login" asp-controller="Account" asp-area="" class="nav-link text-light">Log In</a>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-action="Index" asp-controller="User">Admin</a>
-                        </li>
-                            </a>
-                        </li>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
