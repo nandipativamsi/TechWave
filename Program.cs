@@ -15,8 +15,9 @@ builder.Services.AddDbContext<TechWaveDBContext>(options =>
 
 builder.Services.AddIdentity<User, IdentityRole>(options => {
     options.Password.RequiredLength = 6;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireDigit = false;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireDigit = true;
+    options.User.RequireUniqueEmail = true;
 }).AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<TechWaveDBContext>()
 .AddDefaultTokenProviders();

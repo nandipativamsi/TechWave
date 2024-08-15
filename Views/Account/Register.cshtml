@@ -5,38 +5,60 @@
 <h2>Register</h2>
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <form method="post" asp-action="Register">
-<div class="row mb-2">
-<label class="col-form-label col-md-2">UserName:</label>
-<div class="col-md-4">
-<input asp-for="Username" class="form-control" />
-</div>
-<div class="col">
-<span asp-validation-for="Username" class="text-danger"></span>
-</div>
-</div>
-<div class="row mb-2">
-<label class="col-form-label col-md-2">Password:</label>
-<div class="col-md-4">
-<input type="password" asp-for="Password"
-class="form-control" />
-</div>
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Username:</label>
+        <div class="col-md-4">
+            <input asp-for="Username" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Email:</label>
+        <div class="col-md-4">
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Phone Number:</label>
+        <div class="col-md-4">
+            <input asp-for="PhoneNumber" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Password:</label>
+        <div class="col-md-4">
+            <input type="password" asp-for="Password" class="form-control" />
+        </div>
         <div class="col">
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
     </div>
+
     <div class="row mb-2">
         <label class="col-form-label col-md-2">Confirm Password:</label>
         <div class="col-md-4">
-            <input type="password" asp-for="ConfirmPassword"
-                   class="form-control" />
+            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
     </div>
+
     <div class="row">
         <div class="col offset-md-2">
-
             <button type="submit" class="btn btn-primary">Register</button>
-            <a asp-action="Index" asp-controller="Home"
-               class="btn btn-primary">Cancel</a>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Cancel</a>
         </div>
     </div>
     <div class="row">
