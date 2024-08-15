@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\image\hero1.jpg" />
+  </ItemGroup>
+
 </Project>
