@@ -17,6 +17,99 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+/* Navbar Styles */
+.navbar {
+    background-color: #212529; /* Dark background */
+    border-bottom: 2px solid #007bff; /* Blue border at the bottom */
+}
+
+.navbar-brand {
+    margin-left:3%;
+    width:25vh;
+}
+
+
+.nav-link {
+    color: #ccc !important;
+    margin-right: 15px;
+    padding: 5px 10px;
+    position: relative;
+    transition: color 0.3s ease, box-shadow 0.3s ease; /* Transition for smooth shadow appearance */
+    border-radius: 4px;
+}
+
+    .nav-link:hover {
+        color: #fff !important; /* Lighter text on hover */
+        box-shadow: 0 0 0 2px #808080; /* Box shadow creates a square border effect */
+        border-radius: 4px;
+    }
+
+    /* Remove underline effect */
+    .nav-link::after {
+        display: none;
+    }
+
+/* Logout Button Styling */
+.btn-outline-light {
+    color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .btn-outline-light:hover {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+/* Text light adjustment */
+.text-light {
+    color: #ccc !important;
+    margin-left: 10px;
+}
+
+.hero-image {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('..//image/hero1.jpg'); /* Adjust the path if necessary */
+    background-size: cover;
+    background-position: center;
+    margin-top: -15px;
+    padding: 150px 0;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+    .hero-image h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Optional text shadow for better readability */
+    }
+
+    .hero-image p {
+        font-size: 1.25rem;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Optional text shadow for better readability */
+    }
+
+    .hero-image .btn {
+        padding: 10px 20px;
+        font-size: 1.25rem;
+        border-radius: 5px;
+    }
+footer {
+    background-color: #343a40; /* Dark background */
+    color: white;
+    padding: 30px 0;
+}
+    footer .container-fluid .row {
+        margin-left: 20px; /* Adjust this value as needed */
+    }
+footer a {
+        color: #adb5bd; /* Light gray */
+        text-decoration: none;
+}
+
+footer a:hover {
+            color: #f8f9fa; /* White on hover */
+            text-decoration: underline;
 }
