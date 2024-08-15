@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<TechWave.Models.DomainModel.User> signInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,6 +27,42 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-action="Logout" asp-controller="Account"
+                                      asp-area="">
+                                    <input type="submit" value="Log Out"
+                                           class="btn btn-outline-light" />
+                                    <span class="text-light">@User.Identity.Name</span>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            var action = ViewContext.RouteData.Values["action"]?.ToString();
+                            // anonymous user - Register link and Log In button
+@*                             <li class="nav-item @Nav.Active("Register", action)"> *@
+                            <li class="nav-item">
+
+                                <a asp-action="Register" asp-controller="Account" asp-area=""
+                                   class="nav-link text-dark">
+                                    <span class="fas fa-edit"></span>&nbsp;Register
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Login" asp-controller="Account" asp-area=""
+                                   class="nav-link text-dark">
+                                    Log In
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-action="Index" asp-controller="User">
+                                <span class="fas fa-cog"></span>&nbsp;Admin
+                            </a>
                         </li>
                     </ul>
                 </div>
