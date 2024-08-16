@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<TechWave.Models.DomainModel.User> signInManager
+@inject UserManager<TechWave.Models.DomainModel.User> userManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,15 +11,18 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TechWave.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <!-- Logo aligned to the left -->
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TechWave</a>
 
-                <!-- Toggler for mobile view -->
+                <a href="/" class="navbar-brand">
+                    <img src="~/image/logo.png" alt="TechWave" class="img-fluid">
+                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,18 +34,39 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Products">Shop</a> 
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Cart">Cart</a>
+                        </li>
                         @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
                                 <form method="post" asp-action="Logout" asp-controller="Account" asp-area="">
                                     <input type="submit" value="Log Out" class="btn btn-outline-light" />
-                                    <span class="text-light">@User.Identity.Name</span>
+                                    <span class="text-light">Hi @User.Identity.Name!</span>
                                 </form>
                             </li>
+                            @if (await userManager.IsInRoleAsync(await userManager.GetUserAsync(User), "Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="ManageUser">
+                                        <span class="fas fa-cog"></span>&nbsp;Manage Users
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="ManageProduct">
+                                        <span class="fas fa-cog"></span>&nbsp;Manage Products
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="ManageCategory">
+                                        <span class="fas fa-cog"></span>&nbsp;Manage Category
+                                    </a>
+                                </li>
+                            }
                         }
                         else
                         {
@@ -53,9 +78,6 @@
                                 <a asp-action="Login" asp-controller="Account" asp-area="" class="nav-link text-light">Log In</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-action="Index" asp-controller="User">Admin</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -68,11 +90,46 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - TechWave - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="bg-dark text-white pt-4 pb-4">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Logo and About Section -->
+                <div class="col-md-4 mb-4">
+                    <a href="/" class="d-block mb-3">
+                        <img src="~/image/logo.png" alt="TechWave" class="img-fluid" width="50%">
+                    </a>
+                    <p>Your go-to destination for the latest tech gadgets and accessories. Shop with confidence and enjoy our great deals.</p>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-white">Home</a></li>
+                        <li><a href="/account/register" class="text-white">Register</a></li>
+                        <li><a href="/account/login" class="text-white">Login</a></li>
+                        <li><a href="/Shop/Products" class="text-white">Shop</a></li>
+                        <li><a href="/contact" class="text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 TechWave Street, TechCity, TC 12345</p>
+                    <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> support@techwave.com</p>
+
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center pt-3">
+                &copy; 2024 TechWave. All rights reserved.
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

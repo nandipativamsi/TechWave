@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TechWave.Models;
+using TechWave.Models.DomainModel;
 
 namespace TechWave.Controllers
 {
@@ -27,6 +28,19 @@ namespace TechWave.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult StatusCode(int statusCode)
+        {
+            switch (statusCode)
+            {
+                case 404:
+                    return View("404");
+                case 500:
+                    return View("500");
+                default:
+                    return View("Error");
+            }
         }
     }
 }

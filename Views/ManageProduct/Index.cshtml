@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TechWave.Models.DomainModel.Product>
+
+@{
+    ViewData["Title"] = "Manage Products";
+}
+
+<h1>Manage Products</h1>
+<a asp-action="Add" class="btn btn-primary">Add Product</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Category.Name</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@product.ProductID" class="btn btn-warning">Edit</a>
+                    <form method="post" asp-action="Delete" asp-route-id="@product.ProductID">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
