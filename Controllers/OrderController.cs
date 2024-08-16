@@ -1,28 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TechWave.Models.DomainModel;
 
 namespace TechWave.Controllers
 {
     public class OrderController : Controller
     {
+        [HttpGet]
+        public IActionResult Checkout()
+        {
+            return View(new Order());
+        }
+
         [HttpPost]
-        public IActionResult CompleteCheckout(Order order)
+        public IActionResult CompleteCheckout(Order model)
         {
             if (ModelState.IsValid)
             {
-                // Save the order to the database
-                order.OrderDate = DateTime.Now;
-                _context.Orders.Add(order);
-                _context.SaveChanges();
 
-                // Redirect to the homepage after checkout
-                return RedirectToAction("Index", "Home");
+                TempData["Message"] = $"Thank you, {model.FullName}, for ordering!";
+                return RedirectToAction("ThankYou");
             }
 
-            // If the model is not valid, re-display the checkout page with validation errors
-            return View("Checkout", order);
+            return View("Checkout", model);
         }
 
+        public IActionResult ThankYou()
+        {
+            ViewBag.Message = TempData["Message"] ?? "Thank you for your order!";
+            return View();
+        }
     }
 }
