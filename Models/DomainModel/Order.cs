@@ -1,24 +1,43 @@
-﻿namespace TechWave.Models.DomainModel
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace TechWave.Models.DomainModel
 {
     public class Order
     {
-        public int Id { get; set; } // Primary key
+        [Key]
+        public int OrderID { get; set; }
 
-        // Shipping Information
-        public string FullName { get; set; }
-        public string ShippingAddress { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
+        [Required]
+        [ForeignKey("User")]
+        public string UserID { get; set; }
+        public User User { get; set; }
 
-        // Payment Information
-        public string CardNumber { get; set; }
-        public string CardName { get; set; }
-        public string ExpirationDate { get; set; }
-        public string CVV { get; set; }
+        [Required]
+        public DateTime OrderDate { get; set; }
 
-        // Order Summary
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal TotalTax { get; set; }
+
+        [Required]
+        [MaxLength(200)]
+        public string StreetAddress { get; set; } 
+
+        [Required]
+        [MaxLength(100)]
+        public string City { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Province { get; set; } 
+
+        [Required]
+        [MaxLength(7, ErrorMessage = "Postal Code cannot exceed 7 characters.")]
+        [RegularExpression(@"^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$", ErrorMessage = "Invalid Postal Code format. Use A1A 1A1 format.")]
+        public string ZipCode { get; set; }
     }
 }

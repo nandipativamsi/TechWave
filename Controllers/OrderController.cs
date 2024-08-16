@@ -18,7 +18,7 @@ namespace TechWave.Controllers
             if (ModelState.IsValid)
             {
 
-                TempData["Message"] = $"Thank you, {model.FullName}, for ordering!";
+                TempData["Message"] = $"Thank you, {model.User.UserName}, for ordering!";
                 return RedirectToAction("ThankYou");
             }
 
