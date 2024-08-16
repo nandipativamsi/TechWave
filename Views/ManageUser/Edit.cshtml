@@ -4,27 +4,27 @@
     ViewData["Title"] = "Edit User";
 }
 
-<h1>Edit User</h1>
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form asp-action="Edit" method="post">
+<h1 class="edit-user-title">Edit User</h1>
+<div asp-validation-summary="ModelOnly" class="edit-user-text-danger"></div>
+<form asp-action="Edit" method="post" class="edit-user-form">
 
-    <div class="form-group">
-        <label asp-for="Username">Username</label>
-        <input asp-for="Username" class="form-control" readonly />
+    <div class="edit-user-group">
+        <label asp-for="Username" class="edit-user-label">Username</label>
+        <input asp-for="Username" class="edit-user-input form-control" readonly />
     </div>
 
-    <div class="form-group">
-        <label asp-for="Email">Email</label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="edit-user-group">
+        <label asp-for="Email" class="edit-user-label">Email</label>
+        <input asp-for="Email" class="edit-user-input form-control" />
+        <span asp-validation-for="Email" class="edit-user-text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="PhoneNumber">Phone Number</label>
-        <input asp-for="PhoneNumber" class="form-control" />
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    <div class="edit-user-group">
+        <label asp-for="PhoneNumber" class="edit-user-label">Phone Number</label>
+        <input asp-for="PhoneNumber" class="edit-user-input form-control" />
+        <span asp-validation-for="PhoneNumber" class="edit-user-text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="edit-user-btn-primary btn">Save Changes</button>
+    <a asp-action="Index" class="edit-user-btn-secondary btn">Cancel</a>
 </form>
