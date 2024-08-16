@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TechWave.Models;
 using TechWave.Models.DomainModel;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+
 
 namespace TechWave.Controllers
 {
@@ -10,10 +14,12 @@ namespace TechWave.Controllers
     {
 
         private readonly TechWaveDBContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ManageProductController(TechWaveDBContext context)
+        public ManageProductController(TechWaveDBContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Products
@@ -30,19 +36,53 @@ namespace TechWave.Controllers
             return View();
         }
 
+        //// POST: Products/Add
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Add(Product product)
+        //{
+        //    ModelState.Remove("Category");
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(product);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(product);
+        //}
+
         // POST: Products/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(Product product)
+        public async Task<IActionResult> Add(Product product, IFormFile ImageURL)
         {
             ModelState.Remove("Category");
+            ModelState.Remove("ImageURL");
 
             if (ModelState.IsValid)
             {
+                // Handle the file upload
+                if (ImageURL != null && ImageURL.Length > 0)
+                {
+                    var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + ImageURL.FileName;
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageURL.CopyToAsync(fileStream);
+                    }
+
+                    product.ImageURL = "/images/"+uniqueFileName;
+                }
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Categories = new SelectList(await _context.Categories.ToListAsync(), "CategoryID", "Name");
             return View(product);
         }
 
