@@ -52,13 +52,13 @@ namespace TechWave.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var product = await _context.Products.FindAsync(id);
             if (product == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             // Populate ViewBag.Categories with the categories for the dropdown
@@ -74,7 +74,7 @@ namespace TechWave.Controllers
         {
             if (id != product.ProductID)
             {
-                return NotFound();
+                return View("404");
             }
 
             // Remove CategoryID from ModelState validation if necessary

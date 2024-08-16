@@ -105,6 +105,27 @@ namespace TechWave.Controllers
                 return View("ThankYou");
             }
 
+            var cartItem = _context.Carts
+                .Where(c => c.UserID == userId)
+                .Include(c => c.Product)
+                .ToList();
+
+            // Calculate the total amount and tax
+            decimal totalAmt = 0;
+            decimal totTax = 0;
+            decimal taxRat = 0.13m; // Example tax rate (13%)
+
+            foreach (var item in cartItem)
+            {
+                totalAmt += item.Quantity * item.Product.Price; // Assuming Product has a Price property
+            }
+
+            totTax = totalAmt * taxRat;
+
+            // Storing the total amount and tax in ViewBag to pass to the view
+            ViewBag.TotalAmount = totalAmt.ToString("C");
+            ViewBag.TotalTax = totTax.ToString("C");
+
             // If validation fails, return the view with the model to display errors
             return View("Checkout", model);
         }

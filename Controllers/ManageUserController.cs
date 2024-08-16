@@ -136,7 +136,7 @@ namespace TechWave.Controllers
             var user = await userManager.FindByIdAsync(id);
             if (user == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var userViewModel = new EditUserViewModel
@@ -161,7 +161,7 @@ namespace TechWave.Controllers
             var user = await userManager.FindByNameAsync(model.Username);
             if (user == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             user.Email = model.Email;
