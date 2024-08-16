@@ -18,19 +18,26 @@ namespace TechWave.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var users = new List<User>();
-            foreach (var user in userManager.Users)
+            var users = userManager.Users.ToList();
+            var nonAdminUsers = new List<User>();
+
+            foreach (var user in users)
             {
-                user.RoleNames = await userManager.GetRolesAsync(user);
-                users.Add(user);
+                var roles = await userManager.GetRolesAsync(user);
+                if (!roles.Contains("Admin"))
+                {
+                    nonAdminUsers.Add(user);
+                }
             }
 
             var model = new UserViewModel
             {
-                Users = users
+                Users = nonAdminUsers
             };
+
             return View(model);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(string id)

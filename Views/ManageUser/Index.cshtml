@@ -13,9 +13,7 @@
     <thead>
         <tr>
             <th>Username</th>
-            <th>Roles</th>
-            <th></th>
-            <th></th>
+            <th>Actions</th>
             <th></th>
         </tr>
     </thead>
@@ -32,12 +30,6 @@
             {
                 <tr>
                     <td>@user.UserName</td>
-                    @* <td>
-                        @foreach (string roleName in user.RoleNames)
-                        {
-                            <div>@roleName</div>
-                        }
-                    </td> *@
                     <td>
                         <form method="post" asp-action="Delete" asp-route-id="@user.Id">
                             <button type="submit" class="btn btn-primary">Delete User</button>
@@ -48,16 +40,6 @@
                             <button type="submit" class="btn btn-primary">Edit User</button>
                         </form>
                     </td>
-                    @* <td>
-                        <form method="post" asp-action="AddToAdmin" asp-route-id="@user.Id">
-                            <button type="submit" class="btn btn-primary">Add To Admin</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="post" asp-action="RemoveFromAdmin" asp-route-id="@user.Id">
-                            <button type="submit" class="btn btn-primary">Remove From Admin</button>
-                        </form>
-                    </td> *@
                 </tr>
             }
         }
