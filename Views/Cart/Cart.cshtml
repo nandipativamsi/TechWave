@@ -1,0 +1,179 @@
+﻿@model CartSummary
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<section class="h-100 gradient-custom">
+    <div class="container py-5">
+        <!-- Cart Header -->
+        <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Cart</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Check if there are items in the cart -->
+                        @if (Model.Items.Any())
+                        {
+                            @foreach (var item in Model.Items)
+                            {
+                                <div class="row mb-4">
+                                    <!-- Product Image -->
+                                    <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                        <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                            <img src="@item.Product.ImageURL" class="w-100" alt="@item.Product.Name" />
+                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Details -->
+                                    <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                        <p><strong>@item.Product.Name</strong></p>
+                                        <p>@item.Product.Description</p>
+                                        <p>Price: @item.Product.Price.ToString("C")</p>
+                                    </div>
+
+                                    <!-- Quantity Controls -->
+                                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                        <div class="d-flex mb-4" style="max-width: 300px">
+                                            <button class="btn btn-primary px-3 me-2 quantity-decrement" data-product-id="@item.ProductID">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <input type="number" class="form-control quantity-input" data-product-id="@item.ProductID" value="@item.Quantity" min="1" readonly />
+                                            <button class="btn btn-primary px-3 ms-2 quantity-increment" data-product-id="@item.ProductID">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm mb-2 delete-button" data-product-id="@item.ProductID">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4" />
+                            }
+
+                            <!-- Cart Summary -->
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <p><strong>Subtotal:</strong> <span id="cart-subtotal">@Model.Subtotal.ToString("C")</span></p>
+                                            <p><strong>Tax (13%):</strong> <span id="cart-tax">@Model.Tax.ToString("C")</span></p>
+                                            <p><strong>Total:</strong> <span id="cart-total">@Model.Total.ToString("C")</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-primary btn-lg btn-block" id="add-products-button">Add More Products</button>
+                                            <form method="post" asp-action="Checkout" asp-controller="Cart">
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block">Checkout</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-4 mb-lg-0">
+                                <div class="card-body">
+                                    <p><strong>We accept</strong></p>
+                                    <img class="me-2" width="45px" src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg" alt="Visa" />
+                                    <img class="me-2" width="45px" src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg" alt="American Express" />
+                                    <img class="me-2" width="45px" src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg" alt="Mastercard" />
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>Your cart is empty.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function updateCartSummary() {
+                $.ajax({
+                    url: '@Url.Action("Cart", "Cart")',
+                    type: 'GET',
+                    success: function (response) {
+                        // Update cart summary
+                        $('#cart-subtotal').text(response.subtotal);
+                        $('#cart-tax').text(response.tax);
+                        $('#cart-total').text(response.total);
+                    }
+                });
+            }
+
+            $('.quantity-increment').click(function () {
+                var productId = $(this).data('product-id');
+                var quantityInput = $(this).siblings('.quantity-input');
+                var currentQuantity = parseInt(quantityInput.val());
+                var newQuantity = currentQuantity + 1;
+                quantityInput.val(newQuantity); // Update input field immediately
+                updateQuantity(productId, newQuantity);
+            });
+
+            $('.quantity-decrement').click(function () {
+                var productId = $(this).data('product-id');
+                var quantityInput = $(this).siblings('.quantity-input');
+                var currentQuantity = parseInt(quantityInput.val());
+                var newQuantity = Math.max(1, currentQuantity - 1);
+                quantityInput.val(newQuantity); // Update input field immediately
+                updateQuantity(productId, newQuantity);
+            });
+
+            $('.delete-button').click(function () {
+                var productId = $(this).data('product-id');
+                $.ajax({
+                    url: '@Url.Action("Remove", "Cart")',
+                    type: 'POST',
+                    data: { productId: productId },
+                    success: function (response) {
+                        if (response.success) {
+                            location.reload(); // Reload page to reflect changes
+                        } else {
+                            alert('Failed to delete the item.');
+                        }
+                    },
+                    error: function () {
+                        alert('An error occurred while deleting the item.');
+                    }
+                });
+            });
+
+            $('#add-products-button').click(function () {
+                window.location.href = '@Url.Action("Products", "Products")'; // Redirect to products page
+            });
+
+            function updateQuantity(productId, quantity) {
+                $.ajax({
+                    url: '@Url.Action("UpdateQuantity", "Cart")',
+                    type: 'POST',
+                    data: { productId: productId, quantity: quantity },
+                    success: function (response) {
+                        if (response.success) {
+                            // Update cart summary on success
+                            $('#cart-subtotal').text(response.summary.Subtotal.toFixed(2));
+                            $('#cart-tax').text(response.summary.Tax.toFixed(2));
+                            $('#cart-total').text(response.summary.Total.toFixed(2));
+                        } else {
+                            alert('Failed to update quantity.');
+                        }
+                    },
+                    error: function () {
+                        alert('An error occurred while updating the quantity.');
+                    }
+                });
+            }
+        });
+    </script>
+}
