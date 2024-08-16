@@ -1,56 +1,51 @@
+/* General Font and Layout Styles */
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
+body {
+    margin-bottom: 60px;
+}
+
+/* Button Focus Styles */
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 
 /* Navbar Styles */
 .navbar {
-    background-color: #212529; /* Dark background */
-    border-bottom: 2px solid #007bff; /* Blue border at the bottom */
+    background-color: #212529;
+    border-bottom: 2px solid #007bff;
 }
 
 .navbar-brand {
-    margin-left:3%;
-    width:25vh;
+    margin-left: 3%;
+    width: 25vh;
 }
-
 
 .nav-link {
     color: #ccc !important;
     margin-right: 15px;
     padding: 5px 10px;
     position: relative;
-    transition: color 0.3s ease, box-shadow 0.3s ease; /* Transition for smooth shadow appearance */
+    transition: color 0.3s ease, box-shadow 0.3s ease;
     border-radius: 4px;
 }
 
     .nav-link:hover {
-        color: #fff !important; /* Lighter text on hover */
-        box-shadow: 0 0 0 2px #808080; /* Box shadow creates a square border effect */
+        color: #fff !important;
+        box-shadow: 0 0 0 2px #808080;
         border-radius: 4px;
     }
 
-    /* Remove underline effect */
-    .nav-link::after {
-        display: none;
-    }
-
-/* Logout Button Styling */
 .btn-outline-light {
     color: #007bff;
     border-color: #007bff;
@@ -63,14 +58,14 @@ html {
         border-color: #007bff;
     }
 
-/* Text light adjustment */
 .text-light {
     color: #ccc !important;
     margin-left: 10px;
 }
 
+/* Hero Image Styles */
 .hero-image {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('..//image/hero1.jpg'); /* Adjust the path if necessary */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('..//image/hero1.jpg');
     background-size: cover;
     background-position: center;
     margin-top: -15px;
@@ -83,13 +78,13 @@ html {
     .hero-image h1 {
         font-size: 3.5rem;
         margin-bottom: 20px;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Optional text shadow for better readability */
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     }
 
     .hero-image p {
         font-size: 1.25rem;
         margin-bottom: 30px;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Optional text shadow for better readability */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
 
     .hero-image .btn {
@@ -97,31 +92,710 @@ html {
         font-size: 1.25rem;
         border-radius: 5px;
     }
+
+/* Footer Styles */
 footer {
-    background-color: #343a40; /* Dark background */
+    background-color: #343a40;
     color: white;
     padding: 30px 0;
 }
+
     footer .container-fluid .row {
-        margin-left: 20px; /* Adjust this value as needed */
+        margin-left: 20px;
     }
-footer a {
-        color: #adb5bd; /* Light gray */
+
+    footer a {
+        color: #adb5bd;
         text-decoration: none;
-}
+    }
 
-footer a:hover {
-            color: #f8f9fa; /* White on hover */
+        footer a:hover {
+            color: #f8f9fa;
             text-decoration: underline;
+        }
 
-body {
-  margin-bottom: 60px;
+.manage-users-title {
+    text-align: center;
+    color: #495057;
+    margin-bottom: 30px;
+    font-size: 2rem;
 }
 
-.product-card img {
-    width: 200px; /* Set a fixed width */
-    height: 200px; /* Set a fixed height */
-    object-fit: cover; /* Cover the area while maintaining aspect ratio */
+.manage-users-add-btn {
     display: block;
-    margin: 0 auto; /* Center the image */
+    width: 30%;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+    .manage-users-add-btn:hover {
+        background-color: #0056b3;
+    }
+
+.manage-users-table {
+    margin: 30px auto;
+    width: 60%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+    .manage-users-table th, .manage-users-table td {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .manage-users-table th {
+        background-color: #0f0f0f;
+        color: white;
+    }
+
+    .manage-users-table td {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .manage-users-table tr:last-child td {
+        border-bottom: none;
+    }
+
+.manage-users-btn-group .btn {
+    margin-right: 10px;
+}
+
+.manage-users-edit-btn {
+    background-color: #ffc107;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+    .manage-users-edit-btn:hover {
+        background-color: #e0a800;
+    }
+
+.manage-users-delete-btn {
+    background-color: #dc3545;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+    .manage-users-delete-btn:hover {
+        background-color: #c82333;
+    }
+
+/* Custom Form Styling for Add User Page */
+.add-user-form {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.add-user-title {
+    text-align: center;
+    color: #495057;
+    margin-bottom: 25px;
+}
+
+.add-user-group {
+    margin-bottom: 25px;
+}
+
+.add-user-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.add-user-input {
+    border: 1px solid #adb5bd;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 15px;
+}
+
+.add-user-text-danger {
+    font-size: 13px;
+    font-style: bold;
+    color:red;
+}
+
+.add-user-btn-primary {
+    width: 130px;
+    margin-right: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+    .add-user-btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.add-user-btn-secondary {
+    width: 130px;
+    background-color: #6c757d;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+    .add-user-btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+/* Custom Form Styling for Edit User Page */
+.edit-user-form {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit-user-title {
+    text-align: center;
+    color: #495057;
+    margin-bottom: 25px;
+}
+
+.edit-user-group {
+    margin-bottom: 25px;
+}
+
+.edit-user-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.edit-user-input {
+    border: 1px solid #adb5bd;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 15px;
+}
+
+.edit-user-text-danger {
+    font-size: 13px;
+}
+
+.edit-user-btn-primary {
+    width: 150px;
+    margin-right: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+    .edit-user-btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.edit-user-btn-secondary {
+    width: 150px;
+    background-color: #6c757d;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+    .edit-user-btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+/* Custom Styling for Manage Products Page */
+.manage-products-title {
+    text-align: center;
+    color: #495057;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.manage-products-table {
+    margin: 30px auto;
+    width: 90%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+    .manage-products-table th, .manage-products-table td {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .manage-products-table th {
+        background-color: #0f0f0f;
+        color: white;
+    }
+
+    .manage-products-table td {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .manage-products-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .manage-products-table .btn {
+        margin-right: 10px;
+    }
+
+.manage-products-add-btn {
+    display: block;
+    width:30%;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+    .manage-products-add-btn:hover {
+        background-color: #0056b3;
+    }
+
+.manage-products-edit-btn {
+    background-color: #ffc107;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+    .manage-products-edit-btn:hover {
+        background-color: #e0a800;
+    }
+
+.manage-products-delete-btn {
+    background-color: #dc3545;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+    .manage-products-delete-btn:hover {
+        background-color: #c82333;
+    }
+
+/* Custom Styling for Add Product Page */
+.add-product-container {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-title {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.add-product-form-group {
+    margin-bottom: 15px;
+}
+
+    .add-product-form-group label {
+        color: #495057;
+        font-weight: bold;
+    }
+
+    .add-product-form-group input, .add-product-form-group select {
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+        .add-product-form-group input:focus, .add-product-form-group select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+.add-product-btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+    .add-product-btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.add-product-btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+    .add-product-btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+.add-product-back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .add-product-back-link:hover {
+        color: #0056b3;
+    }
+
+/* Custom Styling for Edit Product Page */
+.edit-product-container {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-product-title {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.edit-product-form-group {
+    margin-bottom: 15px;
+}
+
+    .edit-product-form-group label {
+        color: #495057;
+        font-weight: bold;
+    }
+
+    .edit-product-form-group input, .edit-product-form-group select {
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+        .edit-product-form-group input:focus, .edit-product-form-group select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+.edit-product-btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+    .edit-product-btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.edit-product-btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+    .edit-product-btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+.edit-product-back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .edit-product-back-link:hover {
+        color: #0056b3;
+    }
+
+/* Custom Styling for Manage Categories Page */
+.manage-categories-container {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.manage-categories-title {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.manage-categories-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+    .manage-categories-table th,
+    .manage-categories-table td {
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        text-align: left;
+    }
+
+    .manage-categories-table th {
+        background-color: #222020;
+        color: white;
+    }
+
+    .manage-categories-table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .manage-categories-table tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+.manage-categories-btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    align-self:center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .manage-categories-btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.manage-categories-btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    border: none;
+}
+
+    .manage-categories-btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+.manage-categories-add-link {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+    .manage-categories-add-link:hover {
+        color: #0056b3;
+    }
+
+/* Custom Styling for Add Category Page */
+.add-category-container {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-category-title {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.add-category-form .form-group {
+    margin-bottom: 15px;
+}
+
+.add-category-form label {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.add-category-form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+}
+
+.add-category-form .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .add-category-form .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.add-category-form .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .add-category-form .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+/* Custom Styling for Edit Category Page */
+.edit-category-container {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-category-title {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.edit-category-form .form-group {
+    margin-bottom: 15px;
+}
+
+.edit-category-form label {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.edit-category-form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+}
+
+.edit-category-form .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .edit-category-form .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.edit-category-form .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .edit-category-form .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+/* Product Card Styles */
+.product-card img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
 }

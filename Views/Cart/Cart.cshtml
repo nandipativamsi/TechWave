@@ -41,7 +41,7 @@
                                             <button class="btn btn-primary px-3 me-2 quantity-decrement" data-product-id="@item.ProductID">
                                                 <i class="fas fa-minus"></i>
                                             </button>
-                                            <input type="number" class="form-control quantity-input" data-product-id="@item.ProductID" value="@item.Quantity" min="1" max="5" readonly />
+                                            <input type="number" class="form-control quantity-input" data-product-id="@item.ProductID" value="@item.Quantity" min="1" readonly />
                                             <button class="btn btn-primary px-3 ms-2 quantity-increment" data-product-id="@item.ProductID">
                                                 <i class="fas fa-plus"></i>
                                             </button>
@@ -117,7 +117,7 @@
                 var productId = $(this).data('product-id');
                 var quantityInput = $(this).siblings('.quantity-input');
                 var currentQuantity = parseInt(quantityInput.val());
-                var newQuantity = Math.min(5, currentQuantity + 1); // Limit to 5
+                var newQuantity = currentQuantity + 1;
                 quantityInput.val(newQuantity); // Update input field immediately
                 updateQuantity(productId, newQuantity);
             });
@@ -126,7 +126,7 @@
                 var productId = $(this).data('product-id');
                 var quantityInput = $(this).siblings('.quantity-input');
                 var currentQuantity = parseInt(quantityInput.val());
-                var newQuantity = Math.max(1, currentQuantity - 1); // Limit to 1
+                var newQuantity = Math.max(1, currentQuantity - 1);
                 quantityInput.val(newQuantity); // Update input field immediately
                 updateQuantity(productId, newQuantity);
             });
@@ -161,10 +161,12 @@
                     data: { productId: productId, quantity: quantity },
                     success: function (response) {
                         if (response.success) {
+                            // Optionally, you could update cart summary here
                             // Update cart summary on success
                             $('#cart-subtotal').text(response.summary.Subtotal.toFixed(2));
                             $('#cart-tax').text(response.summary.Tax.toFixed(2));
                             $('#cart-total').text(response.summary.Total.toFixed(2));
+                            window.location.href = window.location.href;  // Reload page to reflect changes
                         } else {
                             alert('Failed to update quantity.');
                         }
@@ -177,3 +179,4 @@
         });
     </script>
 }
+

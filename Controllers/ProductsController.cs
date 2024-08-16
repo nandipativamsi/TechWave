@@ -55,36 +55,39 @@ namespace TechWave.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToCart(int productId, int quantity)
         {
-            // Check if the user is logged in
             if (!User.Identity.IsAuthenticated)
             {
-                // Redirect to login page with the return URL
                 return RedirectToAction("LogIn", "Account", new { returnUrl = Url.Action("AddToCartAfterLogin", "Products", new { productId, quantity }) });
             }
 
-            // Retrieve product
             var product = await _context.Products.FindAsync(productId);
             if (product == null)
             {
                 return NotFound();
             }
 
-            // Get the logged-in user
             var user = await _userManager.GetUserAsync(User);
-
-            // Check if cart item already exists for the user
             var existingCartItem = _context.Carts
                 .FirstOrDefault(c => c.UserID == user.Id && c.ProductID == productId);
 
             if (existingCartItem != null)
             {
-                // Update existing cart item quantity
-                existingCartItem.Quantity += quantity;
+                int totalQuantity = existingCartItem.Quantity + quantity;
+                if (totalQuantity > 5)
+                {
+                    TempData["ErrorMessage"] = "You already added 5 quantities of this product. You can't add more than 5.";
+                    return RedirectToAction("Details", new { id = productId });
+                }
+                existingCartItem.Quantity = totalQuantity;
                 _context.Carts.Update(existingCartItem);
             }
             else
             {
-                // Add new cart item
+                if (quantity > 5)
+                {
+                    TempData["ErrorMessage"] = "You can't add more than 5 quantities of this product.";
+                    return RedirectToAction("Details", new { id = productId });
+                }
                 var cartItem = new Cart
                 {
                     UserID = user.Id,
@@ -96,35 +99,41 @@ namespace TechWave.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Redirect to the cart page
             return RedirectToAction("Cart", "Cart");
         }
+
+
 
         public async Task<IActionResult> AddToCartAfterLogin(int productId, int quantity)
         {
-            // Retrieve product
             var product = await _context.Products.FindAsync(productId);
             if (product == null)
             {
                 return NotFound();
             }
 
-            // Get the logged-in user
             var user = await _userManager.GetUserAsync(User);
-
-            // Check if cart item already exists for the user
             var existingCartItem = _context.Carts
                 .FirstOrDefault(c => c.UserID == user.Id && c.ProductID == productId);
 
             if (existingCartItem != null)
             {
-                // Update existing cart item quantity
-                existingCartItem.Quantity += quantity;
+                int totalQuantity = existingCartItem.Quantity + quantity;
+                if (totalQuantity > 5)
+                {
+                    TempData["ErrorMessage"] = "You already added 5 quantities of this product. You can't add more than 5.";
+                    return RedirectToAction("Details", new { id = productId });
+                }
+                existingCartItem.Quantity = totalQuantity;
                 _context.Carts.Update(existingCartItem);
             }
             else
             {
-                // Add new cart item
+                if (quantity > 5)
+                {
+                    TempData["ErrorMessage"] = "You can't add more than 5 quantities of this product.";
+                    return RedirectToAction("Details", new { id = productId });
+                }
                 var cartItem = new Cart
                 {
                     UserID = user.Id,
@@ -136,8 +145,9 @@ namespace TechWave.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Redirect to the cart page
             return RedirectToAction("Cart", "Cart");
         }
+
+
     }
 }
