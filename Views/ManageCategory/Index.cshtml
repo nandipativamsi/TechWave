@@ -4,33 +4,35 @@
     ViewData["Title"] = "Manage Categories";
 }
 
-<h2>Manage Categories</h2>
+<div class="manage-categories-container">
+    <h2 class="manage-categories-title">Manage Categories</h2>
 
-<p>
-    <a asp-action="Add" class="btn btn-primary">Add New Category</a>
-</p>
+    <p>
+        <a asp-action="Add" class="btn manage-products-add-btn">Add New Category</a>
+    </p>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var category in Model)
-        {
+    <table class="table manage-categories-table">
+        <thead>
             <tr>
-                <td>@category.Name</td>
-                <td>@category.Description</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@category.CategoryID" class="btn btn-primary">Edit</a>
-                    <form method="post" asp-action="Delete" asp-route-id="@category.CategoryID">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@category.CategoryID" class="btn manage-products-edit-btn">Edit</a>
+                        <form method="post" asp-action="Delete" asp-route-id="@category.CategoryID" style="display:inline;">
+                            <button type="submit" class="btn manage-categories-btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -4,35 +4,35 @@
     ViewData["Title"] = " | Add a New User";
 }
 
-<h2>Add a New User</h2>
+<h2 class="add-user-title">Add a New User</h2>
 
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form asp-action="Add" method="post">
-    <div class="form-group">
-        <label asp-for="Username" class="control-label"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+<div asp-validation-summary="ModelOnly" class="add-user-text-danger"></div>
+<form asp-action="Add" method="post" class="add-user-form">
+    <div class="add-user-group">
+        <label asp-for="Username" class="add-user-label"></label>
+        <input asp-for="Username" class="add-user-input form-control" />
+        <span asp-validation-for="Username" class="add-user-text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="add-user-group">
+        <label asp-for="Email" class="add-user-label"></label>
+        <input asp-for="Email" class="add-user-input form-control" />
+        <span asp-validation-for="Email" class="add-user-text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="PhoneNumber" class="control-label"></label>
-        <input asp-for="PhoneNumber" class="form-control" />
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    <div class="add-user-group">
+        <label asp-for="PhoneNumber" class="add-user-label"></label>
+        <input asp-for="PhoneNumber" class="add-user-input form-control" />
+        <span asp-validation-for="PhoneNumber" class="add-user-text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" class="form-control" type="password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+    <div class="add-user-group">
+        <label asp-for="Password" class="add-user-label"></label>
+        <input asp-for="Password" class="add-user-input form-control" type="password" />
+        <span asp-validation-for="Password" class="add-user-text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="control-label"></label>
-        <input asp-for="ConfirmPassword" class="form-control" type="password" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    <div class="add-user-group">
+        <label asp-for="ConfirmPassword" class="add-user-label"></label>
+        <input asp-for="ConfirmPassword" class="add-user-input form-control" type="password" />
+        <span asp-validation-for="ConfirmPassword" class="add-user-text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Add User</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="add-user-btn-primary btn">Add User</button>
+    <a asp-action="Index" class="add-user-btn-secondary btn">Cancel</a>
 </form>

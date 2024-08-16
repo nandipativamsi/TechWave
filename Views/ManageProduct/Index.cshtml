@@ -4,10 +4,10 @@
     ViewData["Title"] = "Manage Products";
 }
 
-<h1>Manage Products</h1>
-<a asp-action="Add" class="btn btn-primary">Add Product</a>
+<h1 class="manage-products-title">Manage Products</h1>
+<a asp-action="Add" class="btn manage-products-add-btn">Add Product</a>
 
-<table class="table">
+<table class="table manage-products-table">
     <thead>
         <tr>
             <th>Product Name</th>
@@ -24,9 +24,9 @@
                 <td>@product.Category.Name</td>
                 <td>@product.Price.ToString("C")</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@product.ProductID" class="btn btn-warning">Edit</a>
-                    <form method="post" asp-action="Delete" asp-route-id="@product.ProductID">
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                    <a asp-action="Edit" asp-route-id="@product.ProductID" class="btn manage-products-edit-btn">Edit</a>
+                    <form method="post" asp-action="Delete" asp-route-id="@product.ProductID" style="display:inline;">
+                        <button type="submit" class="btn manage-products-delete-btn">Delete</button>
                     </form>
                 </td>
             </tr>
