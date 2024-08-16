@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechWave.Models;
 
@@ -11,9 +12,11 @@ using TechWave.Models;
 namespace TechWave.Migrations
 {
     [DbContext(typeof(TechWaveDBContext))]
-    partial class TechWaveDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240816005808_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,11 +281,6 @@ namespace TechWave.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
 
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
@@ -294,11 +292,6 @@ namespace TechWave.Migrations
                     b.Property<string>("ImageURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LongDescription")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
