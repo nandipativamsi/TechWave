@@ -4,25 +4,29 @@
     ViewData["Title"] = "Add Category";
 }
 
-<h2>Add Category</h2>
+<div class="add-category-container">
+    <h2 class="add-category-title">Add Category</h2>
 
-<form asp-action="Add">
-    <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description" class="control-label"></label>
-        <input asp-for="Description" class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Add Category</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-    </div>
-</form>
-
+    <form asp-action="Add" class="add-category-form">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Add Category</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+<br></br>
+<br></br>
+<br></br>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
