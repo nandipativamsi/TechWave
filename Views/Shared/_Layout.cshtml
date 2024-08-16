@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<TechWave.Models.DomainModel.User> signInManager
+@inject UserManager<TechWave.Models.DomainModel.User> userManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,12 +11,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TechWave.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                
+
                 <a href="/" class="navbar-brand">
                     <img src="~/image/logo.png" alt="TechWave" class="img-fluid">
                 </a>
@@ -30,17 +33,39 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Shop</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Products">Shop</a> 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Cart">Cart</a>
                         </li>
                         @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
                                 <form method="post" asp-action="Logout" asp-controller="Account" asp-area="">
                                     <input type="submit" value="Log Out" class="btn btn-outline-light" />
-                                    <span class="text-light">@User.Identity.Name</span>
+                                    <span class="text-light">Hi @User.Identity.Name!</span>
                                 </form>
                             </li>
+                            @if (await userManager.IsInRoleAsync(await userManager.GetUserAsync(User), "Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="ManageUser">
+                                        <span class="fas fa-cog"></span>&nbsp;Manage Users
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="ManageProduct">
+                                        <span class="fas fa-cog"></span>&nbsp;Manage Products
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="ManageCategory">
+                                        <span class="fas fa-cog"></span>&nbsp;Manage Category
+                                    </a>
+                                </li>
+                            }
                         }
                         else
                         {
@@ -52,9 +77,6 @@
                                 <a asp-action="Login" asp-controller="Account" asp-area="" class="nav-link text-light">Log In</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-action="Index" asp-controller="User">Admin</a>
-                        </li>
                     </ul>
                 </div>
             </div>
