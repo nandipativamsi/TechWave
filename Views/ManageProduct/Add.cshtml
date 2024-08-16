@@ -7,7 +7,7 @@
 <div class="add-product-container">
     <h2 class="add-product-title">Add Product</h2>
 
-    <form asp-action="Add">
+    <form asp-action="Add" enctype="multipart/form-data">
         <div class="add-product-form-group">
             <label asp-for="Name" class="control-label"></label>
             <input asp-for="Name" class="form-control" />
@@ -43,9 +43,9 @@
             <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.Categories"></select>
             <span asp-validation-for="CategoryID" class="text-danger"></span>
         </div>
-        <div class="add-product-form-group">
-            <label asp-for="ImageURL" class="control-label"></label>
-            <input asp-for="ImageURL" class="form-control" />
+        <div class="form-group">
+            <label asp-for="ImageURL" class="control-label">Upload Image</label>
+            <input type="file" asp-for="ImageURL" class="form-control" />
             <span asp-validation-for="ImageURL" class="text-danger"></span>
         </div>
         <div class="form-group">
