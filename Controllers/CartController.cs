@@ -42,9 +42,11 @@ namespace TechWave.Controllers
 
         // POST: /Cart/UpdateQuantity
         [HttpPost]
-        [HttpPost]
         public async Task<IActionResult> UpdateQuantity(int productId, int quantity)
         {
+            // Enforce quantity limits
+            quantity = Math.Clamp(quantity, 1, 5);
+
             var userId = await GetUserIdAsync();
             var cartItem = await _context.Carts
                                           .FirstOrDefaultAsync(c => c.UserID == userId && c.ProductID == productId);
@@ -71,7 +73,6 @@ namespace TechWave.Controllers
             }
             return Json(new { success = false, message = "Item not found" });
         }
-
 
         // POST: /Cart/Remove
         [HttpPost]
