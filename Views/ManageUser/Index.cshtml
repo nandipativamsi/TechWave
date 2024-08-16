@@ -4,45 +4,43 @@
     ViewData["Title"] = " | Manage Users";
 }
 
-<h1 class="mb-2">Manage Users</h1>
-<h5 class="mt-2">
-    <a asp-action="Add">Add a User</a>
-</h5>
-
-<table class="table table-bordered table-striped table-sm">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Actions</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.Users.Count() == 0)
-        {
+<div class="container">
+    <h1 class="manage-users-title">Manage Users</h1>
+    <a asp-action="Add" class="btn manage-users-add-btn">Add a User</a>
+    <table class="table manage-users-table">
+        <thead>
             <tr>
-                <td colspan="5">There are no user accounts.</td>
+                <th>Username</th>
+                <th>Actions</th>
             </tr>
-        }
-        else
-        {
-            @foreach (TechWave.Models.DomainModel.User user in Model.Users)
+        </thead>
+        <tbody>
+            @if (Model.Users.Count() == 0)
             {
                 <tr>
-                    <td>@user.UserName</td>
-                    <td>
-                        <form method="post" asp-action="Delete" asp-route-id="@user.Id">
-                            <button type="submit" class="btn btn-primary">Delete User</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="get" asp-action="Edit" asp-route-id="@user.Id">
-                            <button type="submit" class="btn btn-primary">Edit User</button>
-                        </form>
-                    </td>
+                    <td colspan="2">There are no user accounts.</td>
                 </tr>
             }
-        }
-    </tbody>
-</table>
-
+            else
+            {
+                @foreach (TechWave.Models.DomainModel.User user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <div class="btn-group manage-users-btn-group" role="group">
+                                <form method="get" asp-action="Edit" asp-route-id="@user.Id">
+                                    <button type="submit" class="btn manage-users-edit-btn">Edit User</button>
+                                </form>
+                                <form method="post" asp-action="Delete" asp-route-id="@user.Id">
+                                    <button type="submit" class="btn manage-users-delete-btn">Delete User</button>
+                                </form>
+                                
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
