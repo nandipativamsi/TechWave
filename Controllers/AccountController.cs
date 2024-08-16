@@ -33,15 +33,24 @@ namespace TechWave.Controllers
             if (ModelState.IsValid)
             {
                 var fetchUser = await userManager.FindByEmailAsync(model.Email);
-                if (fetchUser!= null)
+                if (fetchUser != null)
                 {
                     var result = await signInManager.PasswordSignInAsync(
-                    fetchUser.UserName, model.Password, isPersistent: false,
-                    lockoutOnFailure: false);
+                        fetchUser.UserName, model.Password, isPersistent: false,
+                        lockoutOnFailure: false);
+
                     if (result.Succeeded)
                     {
-                        if (!string.IsNullOrEmpty(model.ReturnUrl) &&
-                        Url.IsLocalUrl(model.ReturnUrl))
+                        // Check if the user is an Admin
+                        var isAdmin = await userManager.IsInRoleAsync(fetchUser, "Admin");
+
+                        if (isAdmin)
+                        {
+                            // Redirect Admin user to ManageUser index page
+                            return RedirectToAction("Index", "ManageUser");
+                        }
+
+                        if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         {
                             return Redirect(model.ReturnUrl);
                         }
@@ -55,7 +64,8 @@ namespace TechWave.Controllers
             ModelState.AddModelError("", "Invalid username/password.");
             return View(model);
         }
-            [HttpPost]
+
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
