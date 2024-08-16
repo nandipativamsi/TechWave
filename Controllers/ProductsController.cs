@@ -38,7 +38,7 @@ namespace TechWave.Controllers
         {
             if (id <= 0) // Handle invalid ID
             {
-                return NotFound();
+                return View("404");
             }
             var product = _context.Products
                 .Include(p => p.Category)
@@ -46,7 +46,7 @@ namespace TechWave.Controllers
 
             if (product == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             return View(product);
