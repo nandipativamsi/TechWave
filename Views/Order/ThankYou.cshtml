@@ -7,11 +7,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body text-center">
-                    <h2 class="card-title text-success">Thank You for Your Order!</h2>
-                   @*   <p class="card-text">
-                        Your Order Id is: @ViewBag.OrderId
-                     </p> *@
-                    <a href="/" class="btn btn-primary mt-3">Go to Homepage</a>
+                    <div class="hero-image">
+                        <h1 class="display-4">Hey Buddy! Thanks for your order.</h1>
+                        
+                        <a href="@Url.Action("Home", "Index")" class="btn btn-light btn-lg mt-4">Goto Home Page</a>
+                    </div>
+
+                
                 </div>
             </div>
         </div>
