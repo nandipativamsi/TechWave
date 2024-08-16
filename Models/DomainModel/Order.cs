@@ -25,10 +25,19 @@ namespace TechWave.Models.DomainModel
 
         [Required]
         [MaxLength(200)]
-        public string ShippingAddress { get; set; }
+        public string StreetAddress { get; set; } 
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(100)]
+        public string City { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Province { get; set; } 
+
+        [Required]
+        [MaxLength(7, ErrorMessage = "Postal Code cannot exceed 7 characters.")]
+        [RegularExpression(@"^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$", ErrorMessage = "Invalid Postal Code format. Use A1A 1A1 format.")]
         public string ZipCode { get; set; }
     }
 }

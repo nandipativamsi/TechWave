@@ -1,0 +1,80 @@
+﻿@model TechWave.Models.DomainModel.Order
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<div class="container checkout-container mt-5">
+    <h2 class="text-center">Checkout</h2>
+
+    <!-- Order Summary Section -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Order Summary</h4>
+                    <p><strong>Total Amount:</strong> @ViewBag.TotalAmount</p>
+                    <p><strong>Total Tax:</strong> @ViewBag.TotalTax</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="checkoutForm" asp-action="CompleteCheckout" method="post" class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Shipping Information</h3>
+
+                    <div class="mb-3">
+                        <label asp-for="StreetAddress" class="form-label"></label>
+                        <input type="text" id="StreetAddress" name="StreetAddress" asp-for="StreetAddress" class="form-control"  />
+                        <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="City" class="form-label"></label>
+                        <input type="text" id="City" name="City" asp-for="City" class="form-control"  />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Province" class="form-label"></label>
+                        <input type="text" id="Province" name="Province" asp-for="Province" class="form-control"  />
+                        <span asp-validation-for="Province" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ZipCode" class="form-label"></label>
+                        <input type="text" id="ZipCode" name="ZipCode" asp-for="ZipCode" class="form-control"  />
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="OrderDate" value="@DateTime.Now" />
+                     @* <input type="hidden" asp-for="UserID" value="" />  *@
+
+                    <button type="submit" id="checkoutButton" class="btn btn-primary w-100">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Pop-Up Message -->
+    <div id="thankYouMessage" class="alert alert-success mt-4 text-center" style="display:none;">
+        <p id="thankYouText"></p>
+    </div>
+</div>
+@* 
+ <script>
+     document.getElementById('checkoutForm').addEventListener('submit', function (event) {
+         event.preventDefault();
+
+         var thankYouText = "Thank you for your order!";
+         document.getElementById('thankYouText').textContent = thankYouText;
+         document.getElementById('thankYouMessage').style.display = 'block';
+
+         setTimeout(function () {
+             document.getElementById('checkoutForm').submit(); // Submit the form
+         }, 3000);
+     });
+ </script> *@

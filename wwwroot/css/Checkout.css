@@ -1,0 +1,120 @@
+﻿/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.checkout-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #ff6f61;
+}
+
+/* Form Layout */
+.form-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-column {
+    width: 48%;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="month"],
+select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="month"]:focus,
+    select:focus {
+        border-color: #ff6f61;
+        outline: none;
+        box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+    }
+
+/* Payment Section */
+.payment-section {
+    background-color: #fff4e6;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ffc107;
+}
+
+/* Button Styles */
+button[type="submit"] {
+    background-color: #ff6f61;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+    button[type="submit"]:hover {
+        background-color: #e55542;
+    }
+
+/* Pop-Up Message */
+#thankYouMessage {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 5px;
+    display: none;
+}
+
+#thankYouText {
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-section {
+        flex-direction: column;
+    }
+
+    .form-column {
+        width: 100%;
+    }
+}

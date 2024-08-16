@@ -95,7 +95,7 @@ namespace TechWave.Controllers
         [HttpPost]
         public IActionResult Checkout()
         {
-            return RedirectToAction("Checkout", "Checkout");
+            return RedirectToAction("Checkout", "Order");
         }
 
         private async Task<string> GetUserIdAsync()
