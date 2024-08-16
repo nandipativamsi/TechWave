@@ -2,68 +2,108 @@
 @{
     ViewBag.Title = "Register";
 }
-<h2>Register</h2>
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form method="post" asp-action="Register">
-    <div class="row mb-2">
-        <label class="col-form-label col-md-2">Username:</label>
-        <div class="col-md-4">
-            <input asp-for="Username" class="form-control" />
-        </div>
-        <div class="col">
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>
-    </div>
 
-    <div class="row mb-2">
-        <label class="col-form-label col-md-2">Email:</label>
-        <div class="col-md-4">
-            <input asp-for="Email" class="form-control" />
-        </div>
-        <div class="col">
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-    </div>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f8f9fa;
+    }
 
-    <div class="row mb-2">
-        <label class="col-form-label col-md-2">Phone Number:</label>
-        <div class="col-md-4">
-            <input asp-for="PhoneNumber" class="form-control" />
-        </div>
-        <div class="col">
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-        </div>
-    </div>
+    .content-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-    <div class="row mb-2">
-        <label class="col-form-label col-md-2">Password:</label>
-        <div class="col-md-4">
-            <input type="password" asp-for="Password" class="form-control" />
-        </div>
-        <div class="col">
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-    </div>
+    .register-container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
 
-    <div class="row mb-2">
-        <label class="col-form-label col-md-2">Confirm Password:</label>
-        <div class="col-md-4">
-            <input type="password" asp-for="ConfirmPassword" class="form-control" />
-        </div>
-        <div class="col">
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
+        .register-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-    <div class="row">
-        <div class="col offset-md-2">
-            <button type="submit" class="btn btn-primary">Register</button>
-            <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Cancel</a>
-        </div>
+    .btn-primary {
+        width: 100%;
+    }
+
+    .row {
+        margin-bottom: 15px;
+    }
+</style>
+
+
+
+<!-- Content Wrapper -->
+<div class="content-wrapper">
+    <div class="register-container">
+        <h2>Register</h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form method="post" asp-action="Register">
+            <div class="row mb-2">
+                <label class="col-form-label col-md-4">Username:</label>
+                <div class="col-md-8">
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-form-label col-md-4">Email:</label>
+                <div class="col-md-8">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-form-label col-md-4">Phone Number:</label>
+                <div class="col-md-8">
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-form-label col-md-4">Password:</label>
+                <div class="col-md-8">
+                    <input type="password" asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-form-label col-md-4">Confirm Password:</label>
+                <div class="col-md-8">
+                    <input type="password" asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary mt-2" style="width: 100%;">Cancel</a>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    Already registered? <a asp-action="LogIn">Log In</a>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="row">
-        <div class="col offset-md-2">
-            Already registered? <a asp-action="LogIn">Log In</a>
-        </div>
-    </div>
-</form>
+</div>

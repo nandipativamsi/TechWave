@@ -163,10 +163,11 @@
                         if (response.success) {
                             // Optionally, you could update cart summary here
                             // Update cart summary on success
+                            location.reload();  // Reload page to reflect changes
                             $('#cart-subtotal').text(response.summary.Subtotal.toFixed(2));
                             $('#cart-tax').text(response.summary.Tax.toFixed(2));
                             $('#cart-total').text(response.summary.Total.toFixed(2));
-                            window.location.href = window.location.href;  // Reload page to reflect changes
+                            
                         } else {
                             alert('Failed to update quantity.');
                         }

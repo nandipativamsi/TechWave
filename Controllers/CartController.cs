@@ -19,8 +19,7 @@ namespace TechWave.Controllers
             _context = context;
             _userManager = userManager;
         }
-
-        // GET: /Cart
+        // Get Method
         public async Task<IActionResult> Cart()
         {
             var userId = await GetUserIdAsync();
@@ -39,8 +38,7 @@ namespace TechWave.Controllers
 
             return View(cartSummary);
         }
-
-        // POST: /Cart/UpdateQuantity
+        // Post Method
         [HttpPost]
         [HttpPost]
         public async Task<IActionResult> UpdateQuantity(int productId, int quantity)
@@ -75,8 +73,7 @@ namespace TechWave.Controllers
             return Json(new { success = false, message = "Item not found" });
         }
 
-
-        // POST: /Cart/Remove
+        // Post Method
         [HttpPost]
         public async Task<IActionResult> Remove(int productId)
         {
@@ -90,8 +87,7 @@ namespace TechWave.Controllers
             }
             return Json(new { success = true });
         }
-
-        // POST: /Cart/Checkout
+        // Post Method
         [HttpPost]
         public IActionResult Checkout()
         {

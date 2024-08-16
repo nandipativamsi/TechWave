@@ -16,17 +16,21 @@ namespace TechWave.Controllers
             signInManager = signInMngr;
         }
 
+        // Get Method
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
+        // Get Method
         [HttpGet]
         public IActionResult LogIn(string returnURL = "")
         {
             var model = new LoginViewModel { ReturnUrl = returnURL };
             return View(model);
         }
+        // Post Method
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginViewModel model)
         {
@@ -64,7 +68,7 @@ namespace TechWave.Controllers
             ModelState.AddModelError("", "Invalid username/password.");
             return View(model);
         }
-
+        // Post Method
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {

@@ -15,7 +15,7 @@ namespace TechWave.Controllers
             userManager = userMngr;
             roleManager = roleMngr;
         }
-
+        // Get Method
         public async Task<IActionResult> Index()
         {
             var users = userManager.Users.ToList();
@@ -38,7 +38,7 @@ namespace TechWave.Controllers
             return View(model);
         }
 
-
+        // Post Method
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
@@ -55,45 +55,7 @@ namespace TechWave.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddToAdmin(string id)
-        {
-            var adminRole = await roleManager.FindByNameAsync("Admin");
-            if (adminRole == null)
-            {
-                TempData["message"] = "Admin role does not exist. Click 'Create Admin Role' button to create it.";
-            }
-            else
-            {
-                var user = await userManager.FindByIdAsync(id);
-                await userManager.AddToRoleAsync(user, adminRole.Name);
-            }
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> RemoveFromAdmin(string id)
-        {
-            var user = await userManager.FindByIdAsync(id);
-            await userManager.RemoveFromRoleAsync(user, "Admin");
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteRole(string id)
-        {
-            var role = await roleManager.FindByIdAsync(id);
-            await roleManager.DeleteAsync(role);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateAdminRole()
-        {
-            await roleManager.CreateAsync(new IdentityRole("Admin"));
-            return RedirectToAction("Index");
-        }
-
+       
         [HttpGet]
         public IActionResult Add()
         {
